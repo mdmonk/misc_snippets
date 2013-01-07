@@ -1,0 +1,1161 @@
+perl -wle 'blah'
+
+perl -wle 'if("who" =~ /who/){$_="y"}else{$_="n"}print'
+
+perl -wle 'if("woh" =~ /who/){$_="y"}else{$_="n"}print'
+
+perl -wle 'if("woh" =~ /[who]/){$_="y"}else{$_="n"}print'
+
+perl -wle '$,=" ";print "how","now"'
+
+perl -wle '$,=" ";print scalar("how","now")'
+
+perl -we 'for(qw(a b c)){open(FH,$_);while(<FH>){print"<$_>"}}'
+
+perl -wle '$_=qq(<a href="d">e</a>);print $1 if /=([^>]+)/'
+
+perl -wle 'use HTML::LinkExtor;$e=HTML::LinkExtor->new(sub{print"@_"});$e->parse(qq(<a href="http://nowhere/here">e</a>))'
+
+perl -wle 'print 1 ? "yes" : "no"'
+
+perl -wle 'print 0 ? "yes" : "no"'
+
+perl -wle '$_="s01h389345 { ...... al;ksjfd;ljfds ... 172.1.1.1 }";print "$1 $2" if /^(\S+) {[^}]+(\b\d+\.\d+\.\d+\.\d+)/'
+
+perl -wne 'print "$1 $2" if /^(\S+) {[^}]+(\b\d+\.\d+\.\d+\.\d+)/' sourcefile > newfile
+
+perl -wle '$_="s19980930.pdf";@a=/(\d{4})(\d{2})(\d{2})/;$a[0]-=1900;$a[1]--;use POSIX"strftime";print "$_ ",strftime"%B %d, %Y",0,0,0,@a[2,1,0]'
+
+perl -wle '$_="s19980930.pdf";%m=qw(01 January 02 February 03 March 04 April 05 May 06 June 07 July 08 August 09 September 10 October 11 November 12 December);print "$m{$2} $3, $1" if /(\d{4})(\d{2})(\d{2})/'
+
+perl -we '$count = 0; open(FILE,"filename") || die $!; @file = <FILE>; foreach $tmp { if ($tmp new "\n") { $count++; }} print $count,"\n";' -> try this
+
+perl -we 'open(F,"file") || die $!; while(<F>) { $count++ unless $_ eq "\n"; }'
+
+perl -wne '/^\n/||print $c++'
+
+perl -we 'open(F,"file") || die $!; while(<F>) { $count++ unless $_ eq "\n"; }'
+
+perl -ne '/^\n/||print ++$c' filename -> output: 1234567891011 -> not seem to be working =)
+
+perl -ne '/^\n/||++$c;print $c' filename
+
+perl -ne '/^\n/||++$c;END{print $c}' filename    there
+
+perl -we '$string = "/ppp206/s/78/104/"; @var = split(/\//,$string); $new_var = $var[4]; print $new_var, $var[4]; $var[4] = ""; print $var[4];'
+
+perl -we 'open(F,"find . -print |") || die $!; while(<F>) { if ($_ =~ /stats\/.*?/
+
+perl -wle 'print scalar(localtime)'
+
+perl -wni -e 'print unless /text/' sourcefile > newfile
+
+perl -v
+
+perl -v result: version 4.0
+
+perl -we 'use URI::URL;$u = url("http://www.whatever.com/whatever/help");printf"scheme<%s> netloc<%s> host<%s> port<%s> path<%s>\n",$u->scheme,$u->netloc,$u->host,$u->port,$u->path'
+
+perl -wle 'print "http://www.whatever.com/whatever/help" =~ m#//([^/]+)#'
+
+perl -wle '@array=split(/[:+]/,"name1+name2:name3+name4");print "@array"'
+
+perl -wle '$_="this is a test";m/(this)/;print $1;'
+
+perl -wle 'use CGI;print CGI::escape("()#")'
+
+perl -wle 'use CGI;print CGI::unescape("%28%29%23")'
+
+perl -wle 'use CGI;print CGI::escape("\r\n")'
+
+perl -v
+
+perl -le '@a = ("a=b","c=d","e=f");foreach (@a){@{$b[$i++]}=split "="}$,="\t";foreach(@b){print @{$_}}'
+
+perl -wle '@s=({name=>"file one",mode=>777,uid=>500,gid=>500,size=>20000},{name=>"file two",mode=>755,uid=>501,gid=>501,size=>25000});foreach(@s){foreach $k (keys %{$_}){print "$k = ${$_}{$k}\n";}}'
+
+perl -le '@f=("tmp.c","tmp.pl","info.cron");foreach(@f){@{$Stats[$i++]}{"mode","uid","gid","size"}=(stat)[2,4,5,7]}foreach(@Stats){foreach $k (keys %{$_}){print "$k = $_->{$k}"}}'
+
+perl -we 'eval "print q(h);\nprint q(i )\n;print qq(there\n)"'
+
+perl -we 'print eval{$v=3+3};print " $v\n"'
+
+perl -we '$v=qq(command:print "yes";\nprint " no";\n);eval $v'
+
+perl -we '$v=qq(command:print "yes";\nprint " no";\n);sub myprint{print"my<@_>"};$v =~ s/print/myprint/g;eval $v'
+
+perl -wle '$a=q("I am " . (1 + $b));$b=5;print eval $a'
+
+perl -wle '$a=q("I am @{[1+$b]}");$b=5;print eval $a'
+
+perl -wle '$b=5;print "I am @{[1+$b]}"'
+
+perl -e '$a=q|I have @{[1+$n]} ${fruit}s.|; $n=4; $fruit="apple"; print eval $a;' doesnt work, and i need exactly this one
+
+perl -le '$a=q|"I have @{[1+$n]} ${fruit}s."|; $n=4; $fruit="apple"; print eval $a;'
+
+perl -e '$a=q|I have @{[1+$n]} ${fruit}s.|; $n=4; $fruit="apple"; print eval "\"$a\"";'
+
+perl -wle 'use Cwd;print cwd'
+
+perl -wle '$q=2;a(\$q);print $q;sub a{$v=$_[0];print $$v;$v=4;print $v;}'
+
+perl -wle '$q=2;a(\$q);print $q;sub a{$v=$_[0];print ${$v};${$v}=4;print ${$v};}'
+
+perl -wle '$q=2;print $q;print \$q'
+
+perl -wle '$a="qyz/";b(\$a);sub b{$dir=$_[0];${$dir} =~
+
+perl -wle '$a="qyz/";b(\$a);sub b{$dir=$_[0];${$dir} =~
+
+perl -wle '$a="qyz";b(\$a);sub b{$dir=$_[0];if(${$dir} !~ m#/$#){${$dir} .= "/"}}print $a'
+
+perl -wle '@f = ("..","blah", "foo", "bar");for($i=0;$i<=$#f;$i++){splice @f,$i,1 if $f[$i]=~/\.\./} $,="\n";print @f'
+
+perl -wle '@ad = ("/foo/f/h","/foo/f/g");foreach(@ad){print m#/foo/f/g#?1:0}'
+
+perl -wle '$_="http://www.blah.com/blah/";s#^(?:\w+://)?(?:[^:]+:[^@]+@)?([^/]+).*#$1#;print'
+
+perl -we 'use Net::POP3;$p=Net::POP3->new("localhost");$p->user("lzh");$p->pass("password");for(@{$p->top(1,0)}){print substr($_,0,-1),"<br>\n"}'
+
+perl -wle '%hash=(1,2);$a = \%hash;print "-",%a,"-"'
+
+perl -wle '%hash=(1,2);$a = \%hash;%a=(2,3);print "-",%a,"-"'
+
+perl -we 'use Net::POP3;$p=Net::POP3->new("localhost");$p->user("lzh");$p->pass("password");use Mail::Header;$e=new Mail::Header $p->top(1,0);$,=" ";print $e->tags'
+
+perl -wle '$_="/a/b/c/";s#(/a/b).*#$1#;print'
+
+perl -wle '$_="/a/b/c/..";s#(/..).*#$1#;print'
+
+perl -wle '$x=5;{local $x=$x;$x+=5;print $x;}print $x;'
+
+perl -wle '$x=5;{local $x=$x;$x+=5;print $x;}print $x;' is the same as perl -wle '$x=5;&local;sub local{local $x=$x;$x+=5;print $x;}print $x;'
+
+perl -wle '$x=5;if($x){local($x)=$x;$x+=5;print $x;}else{local($x)=$x;$
+
+perl -wle '$_="a lot of letters";if(m/^\d+$/){print "numbers"}else{print "letters"}'
+
+perl -wle 'print readlink("blah")'
+
+perl -wle 'print join":","003456AE"=~/../g'
+
+perl -wle '$_="003456AE"; s/..(?!$)/$&:/g; print'
+
+perl -we '$something = "1.23.423.234"; $something =~ s/\./\:/g; print $something;' works just fine
+
+perl -we '$something = "1.23.423.234"; $something =~ s/\./:/g; print $something;' works just fine as well
+
+perl -we '$/="\nFrom ";while(<>){$i++;open(FH,">$i");print FH "From " if substr($_,0,5) ne "From ";if(substr($_,-6) eq $/){print FH substr($_,0,-6)}else{print FH}}' mailbox
+
+perl -we '$user="jasonk";$path="/home/users/j/jasonk/public_html";$letter=substr($
+
+perl -wle '$_="/dir1/../dir2/";1 while s#/\./|/?[^/]*/\.\./?|//+#/#;print'
+
+perl -wle '$x=0;$z=10;for(my($x)=0;$x<$z;$x++){print $x;}'
+
+perl -wle '$z=10;for(my($x)=0;$x<$z;$x++){print $x;}'
+
+perl -we '$z=10;for($x=0;$x<$z;$x++){print $x;}' -> returnes the same
+
+perl -we '&zero;&one;$x=5;sub zero{local($x)=$x;$z=10;for($x=0;$x<$z;$x++){print $x;}}sub one{lo
+
+perl -wle 'print pack"H",10' | cat -v
+
+perl -wle 'print unpack"H2",(pack"I",10)'
+
+perl -wle 'system q(perl -we "exit 55");print $?'
+
+perl -wle 'system q(perl -we "exit 55");print $? >> 8'
+
+perl -wle 'system q(perl -we "exit 55");print $? >> 8'
+
+perl -wle 'system q(perl -we "exit 55");$!=$? >> 8;print $!'
+
+perl -we '$_="\\w" x 3;print"before<$_>";tr/\\//d;print" after<$_>\n"'
+
+perl -wle '/+/'
+
+perl -wle '/[]/'
+
+perl -wle '/?/'
+
+perl -wle '/:/'
+
+perl -wle '1=~/:/'
+
+perl -we '$xxx=<STDIN>;$xxx="yyy" if ($xxx=~/text/); print $xxx;'
+
+perl -le '@f=("tmp.c","tmp.pl","info.cron");foreach(@f){@{$Stats[$i++]}{"mode","uid","gid","size"}=(stat)[2,4,5,7]}foreach(@Stats){foreach $k (keys %{$_}){print "$k = $_->{$k}"}}'
+
+perl -wle '$_="*.foo, *.blah, *.bleh";s/, /\$|/g;$_ .= "\$";print;'
+
+perl -wle '$_="*.foo, *.blah, *.bleh";s/, /\$|/g;s/\*\./\\w+\\./g;$_ .= "\$";print;'
+
+perl -wle '$_="?";s#\?#\\w+#g;print'
+
+perl -wle '$_="blah?blah?";s#\?#\\w+#g;print'
+
+perl -wle '$_="a.*";s#(.*)\.\*#\^$1\\.\w+\\#g;print'
+
+perl -wle '$_="a.*";s#(.*)\.\*#\^$1\\.\\w+#g;print'
+
+perl -wle '$_="foo.*, a.*";s#(?:, )?(.*?)\.\*#\^$1\\.\\w+#g;print'
+
+perl -le '$_="foo.*, a.*";s#(, )?(.*?)\.\*#($1&&"|").qq(\^$2\\.\\w+)#eg;print'
+
+perl -wle '$_="*.htm, *.asc, jason.*";s#(\.\*|, |\?|\*\.)#($1 eq ".*"&&"\\.\\w+\$")||($1 eq ", "&&"|")||($1 eq "*."&&"^\\w+\\.")#ge;print'
+
+time perl -we 'use strict;my%h;$^I="";while(<>){if(s#<A NAME="([^"]+)">##){print STDOUT "$ARGV#$1\n";print qq(<pre><a name="$1" href="#$1">f</a>rag:(url in topic)/$ARGV#$1</pre>\n) if !$h{$1}++}print;%h=()if eof}' `find * -type f`
+
+perl -wle 'print "aa#" =~ /[^\w_]/ ? "true" : "false"'
+
+perl -wle 'print "there I was" =~ /\b(\w)\b/'
+
+perl -we 'use URI::URL;$u=new URI::URL"http://this.addy.here/";printf"scheme:%s user:%s pass:%s host:%s port:%s epath:%s eparams:%s equery:%s frag:%s\n",map {defined$_?$_:"undef"} $u->crack'
+
+perl -wle 'if("http://this.addy.here/" =~ m#/([^/]+)#){print $1}'
+
+perl -wle 'opendir(S,".")||die$!;@f=readdir(S);foreach$x(@f){if($x=~/secure/){open(SE,"$x")||die$!;while(<SE>){if(/refused/){$_=~s/\n+?/\n/g;print;}}}}' > file -> this works for all matched lines
+
+perl -wle '$v="b b";$v=~tr/ //s;print $v'
+
+perl -we '$x="b  b b";$x=~s/\s+?/\s/g;print$x;' -> bizarre -> this returns "bssbsb" for me -> I am lost ;)
+
+perl -we '$x="b  b b";$x=~tr/\s+?/\s/;print$x;' -> returnes same as input
+
+perl -wle '@o = (1,2,3,4,5);@n=@o;print @n'
+
+perl -d program.pl
+
+perl -wle 'use File::KGlob2RE;{local$^W;print kglob2re("*.text")}'
+
+perl -wle 'open(F1,"file1")||die$!;open(F2,"file2")||die$!;while(<F1>){print unless /pat/;}' he he.... gotcha
+
+perl -wle 'open(F1,"nogood")||die$!;open(F2,">")||die$!;while(<F1>){print F2;}'
+
+perl -wle 'open(F1,"nogood")||die$!;open(F2,">")||die$!;while(<F1>){print F2 $_;}'
+
+perl -wle '@x=qw(a b c);foreach(@x){print "before: $_";$_=~s/^/\^/;prin
+
+perl -we 'open(F,"file")||open(F,">file")||die$!;'
+
+perl -we 'open(F,">>file")||open(F,">file")||die$!;'
+
+perl -we 'opendir(D,"/dir/")||die$!;@files=<D>;foreach(@files){if(/file-to-open/){open(F,">>file")||die$!;}else{open(F,">file")||die$!;}}
+
+perl -we 'opendir(D,"/dir/")||die$!;@files=<D>;foreach(@files){if(/file-to-open/){open(F,">>file")||die$!;}else{open(F,">file")||die$!;}}
+
+perl -wle'opendir(D,"dirname")||die$!;while(<D>){print "Found!" if /filename/;}'
+
+perl -wle'opendir(D,"dirname")||die$!;while(<D>){print "Found!" if $_ eq "filename";}'
+
+perl -wle 'opendir(D,"dir")||die$!;@dir=readdir(D);foreach(@dir){if(m/filename/){print "Exist";}else{print "No file found";}}'
+
+perl -we '$f='file';open(F,">>$f")||if(!$f){open(F,">$f")||die$!;}||die$!' -> try this or shorter:
+
+perl -we '$f='file';open(F,">>$f")||if(!$f){open(F,">$f")||die$!;}||die$!'
+
+perl -we '$f='file';open(F,">>$f")||open(F,">$f")||die$!;||die$!' -> there
+
+perl -we '$f='file';open(F,">>$f")||open(F,">$f")||die$!;' -> there
+
+perl -wle '@x=`ls -l`;foreach(@x){@f=split,/ /;$f[0]=substr($_,0,1);if($f[0]
+
+perl -we '$x="a.b.c";$x=~s/\./\\\./g;print $x;'
+
+perl -wle '$_=q(blah.  blah\.);s#(?!\\)(.)\.#$1(\\.)?#g;print'
+
+perl -wle '@df=`df`;foreach(@df){print "",(split/\s+/)[0],"" if /6\d%/;}'
+
+perl -wle '@df=`df`;foreach(@df){print "",(split/\s+/)[0]," ($1)" if /([6-9]\d%)/;}'
+
+perl -we '$var="fred";print "$var ";$var=~tr/!-~/P-~!-O/;print "$var ";$var=~tr/!-~/P-~!-O/;print "$var\n"'
+
+perl -we 'open(OLD,"oldfile")||die$!;open(NEW,">newfile")||die$!;while(<OLD>){print NEW unless /^[A-Z]\.sam\s+?/;}'
+
+perl -we 'open(OLD,"oldfile")||die$!;open(NEW,">newfile")||die$!;while(<OLD>){print NEW unless /^(INSTALL|README)\.sam\s+?/;}'
+
+perl -we 'open(OLD,"oldfile")||die$!;open(NEW,">newfile")||die$!;while(<OLD>){print NEW unless /^((INSTALL|README)\.sam|test)\s+?/;}'
+
+perl -wle '$,=" ";print wow => "neat"'
+
+perl -wle '$,=" ";print wow, "neat"'
+
+perl -wle '$,=" ";print "wow", "neat"'
+
+perl -wle '@{$_}=(1,2,3);print'
+
+perl -wle '@{$_}=(1,2,3);print @{$_}'
+
+perl -wle '$num=12.533465;printf("\$%.2f",$num)'
+
+perl -wle '$_="this? is a test (yes it is)?";s#(?!\))(.)\?#$1\\.#;print'
+
+perl -we 'END { close $hnd; }use IO::Socket;$hnd = IO::Socket::INET->new("127.0.0.1:13");print <$hnd>'
+
+perl -we 'END { close $hnd; }use IO::Socket;$hnd = IO::Socket::INET::new("127.0.0.1:13");print <$hnd>'
+
+perl -wle 'use Text::Wrap qw(wrap $columns);$columns=10;print wrap "","","I went to the store the other day."'
+
+perl -wle 'if(@a){print"y"}else{print"n"}'
+
+perl -wle '@a=1;if(@a){print"y"}else{print"n"}'
+
+perl -wle '$val="oh";$str=$val x 9;$c++ while $str =~ /$val/g;print $c'
+
+perl -wle '$val="oh";$str=$val x 9;print $str'
+
+perl -we '$var="a";@x=qw(a v a e s a);foreach(@x){push(@z,$_)if /$var/}print(scalar(@z));'
+
+perl -wle '$str="oh oh oh no ah ah no no no no";for $val (qw(oh no ah)){$c=0;$c++ while $str =~ /$val/g;print qq($val is in "$str" $c times)}'
+
+perl -wle '$v=sprintf("%.1f",10.195);print $v'
+
+perl -we 'use POSIX "strftime";for(A..Z,"a".."z"){$t=strftime("%$_",localtime);print "%$_: $t " if $t ne ""}'
+
+perl -wle '$_="d:val";($v)=/:(.*)/;print $v'
+
+perl -wle '@mixed= qw/f h q r n i v d h/;@alpha = sort {uc($a) cmp uc($b)} @mixed;$,=qq(, );print @alpha'
+
+perl -wle '@mixed= qw/f Z h q A a r n Q i I v d h/;@alpha = sort {$a cmp $b} @mixed;$,=qq(, );print @alpha'
+
+perl -wle '$a="1,234";print $a+200'
+
+perl -wle 'if("h" =~ /H/){$_="y"}else{$_="n"}print'
+
+perl -wle 'if("h" =~ /H/i){$_="y"}else{$_="n"}print'
+
+perl -wle 'print length pack("a a a S S S L", () )'
+
+perl -wle '$_="yes <no> yes <sure> whatever";s/<[^>]+>//g;print'
+
+perl -wle 'use CGI;print CGI::escape " !#&()*+,/:;<=>?@[]^`{|}~"'
+
+perl -wle 'use CGI;print CGI::unescape "%20%21%23%26%28%29%2A%2B%2C%2F%3A%3B%3C%3D%3E%3F%40%5B%5D%5E%60%7B%7C%7D%7E"'
+
+perl -wle 'foreach(keys %ENV){print "$_ = $ENV{$_}"}
+
+perl -wle 'use vars qw($nick $greeting);$_=q($nick says $greeting);$nick="fred";$greeting="hi";s/(\$\w+)/$1/eeg;print'
+
+perl -wle 'if(1 =~ m#/1#){$_="y"}else{$_="n"}print'
+
+perl -wle 'if("/1" =~ m#/1#){$_="y"}else{$_="n"}print'
+
+perl -wle 'use Stat::lsMode;print file_mode("a")'
+
+perl -wle 'use Stat::lsMode;$mode=0644;print format_perms($mode)'
+
+perl -we 'open(FH,">a");print FH "hi\nbye\n"'
+
+perl -we 'open(FH,"a");print "a: ",<FH>;print "b: ",<FH>'
+
+perl -we 'open(FH,"a");print "a: ",scalar <FH>;print "b: ",scalar <FH>
+
+perl -wle '$_="ok I { see } now";s#({[^}]+})|([^{}]+)#my $v;unless(defined($1)){$v=$2;$v=~s/ +//g}else{$v=$1}$v#e;print'
+
+perl -wle '$_="ok I { see } now";s#({[^}]+})|([^{}]+)#my $v;unless(defined($1)){$v=$2;$v=~s/ +//g}else{$v=$1}$v#ge;print'
+
+perl -we 'system qq( cp -a " wow " " now " )'  seems to work
+
+perl -wle 'use integer;$v=4.4 + 4.5;print $v'
+
+perl -wle '$v=sprintf("%.0f",4.4 + 4.5);print $v'
+
+perl -wle '$v="aaaaaaa";print $v =~ tr/a//'
+
+perl -wle '%h=qw/1 1 2 2 3 3 4 4/;print scalar(keys %h)'
+
+perl -wle '$s="A:B:C:D";$,="\n";print split /:/,$s,2'
+
+perl -wle '$lzh_mood=<STDIN>;if($zh_mood eq "good"){print "Hi\n";}else{print "Perl question?\n";}'
+
+perl -wle '@a=(["a",2],["b",1]);for(sort{${$a}[1] <=> ${$b}[1]} @a){print "@{$_}"}'
+
+perl -e 'open(PIPE,"ls -la");while(<PIPE>){print "$_"}'
+
+perl -e 'open(PIPE,"ls -la|");while(<PIPE>){print "$_"}'
+
+perl -e '$a="abc";$a = substr("b", $a);print "$a\n"'
+
+perl -wle 'print substr("wow",1)'
+
+perl -wle 'print substr("wow","abc")'
+
+perl -wle 'print substr("wow",0,1)'
+
+perl -wle '$n=shift;@a=qw(0 1 2 3 4 5 6 7 8 9);$t="";while($n){$i=$n%@a;$t="$a[$i]$t";$n-=$i;$n/=@a}print $t' 333333333
+
+perl -wle '$n=shift;@a=qw(0 1 2 3 4 5 6 7 8 9 a b c d e f);$t="";while($n){$i=$n%@a;$t="$a[$i]$t";$n-=$i;$n/=@a}print $t' 333333333
+
+perl -we 'printf"%x\n",333333333'
+
+perl -wle '$x="a:b:c|def:b";@x=split(/\|/,$x);@x0=split(/:/,$x[0]);@x1=split(/:
+
+perl -we '$x="a:b:c|def:b";@x=split(/\|/,$x);@x0=split(/:/,$x[0]);@x1=split(/:/,$x[1]);$n=scalar(@x0);for($i=0;$i<$n;$i++){print "x0[$i]<$x0[$i]> x1[1]<$x[1]> ";if($x0[$i] eq $x1[1]){print "Got it!"}else{print "Wrong!"}print"\n"}'
+
+perl -wle '$y=3;{my$y=5}print$y'
+
+perl -wle '@x=qw(1 2 3);@y=qw(a b c);push @new,[@x];push @new,[@y];print @new'
+
+perl -we 'require "dumpvar.pl";@x=qw(1 2 3);@y=qw(a b c);push @new,[@x];push @new,[@y];dumpvar("main::","new")'
+
+perl -wle '@a=qw(cat dog bird);@hash{1} = @a;$,="-";print %hash'
+
+perl -we 'print"# of chars? ";chomp($_=<>);$n=!/\D/?$_:length;print"# of seconds? ";chomp($_=<>);die"seconds must be a number!\n"if/\D/;printf"%.0f wpm\n",12*$n/$_'
+
+perl -wle '$v=sprintf("%.2f",3.45555);print $v'
+
+perl -wle '@a=("\\083b-111823 AKA Nightcrawler","\\079b-s0176");for(@a){s/^(\S+).*/$1/}print "@a"'
+
+perl -wle '@a=("\\083b-111823 AKA Nightcrawler","\\079b-s0176");for(@a){s/^\\*(\S+).*/$1/}print "@a"'
+
+perl -wle 'use DB_File;use Fcntl;tie(%h,"DB_File","berkley.db",O_RDWR|O_CREAT, 0640);print $h{KEY};untie %h;'
+
+perl -wle '@a=(1,2);print"@a";$"=" wow ";print"@a"'
+
+perl -we '@a=("",1,2);print "(",join(")(",@a),")\n";'
+
+perl -wle '@a=qw/{ 1 2 3 4 5 }/;@a=grep(!/[{}]/,@a);$,=", ";print @a'
+
+perl -wle '@a=qw({ 0 1 2 });splice(@a,0,1) if $a[0] eq "{";splice(@a,-1,1) if $a[-1] eq "}";print "@a"'
+
+perl -wle '@a=qw/{12345} x x x/;@a=grep(s/[{}]//g,@a);$,=", ";print @a'
+
+perl -le 'sub printto { local ($where) = @_; print $where "hello!"; } &printto(\*STDOUT)'
+
+perl -wle '@a=qw(one two three);@b=qw(one four five);$max=scalar(@a);for($i=0;$
+
+perl -wle 'print unpack("n","\1\0")'
+
+perl -wle 'use Sort::Fields;$,=" ";@a=qw(a|b|c|d|1|e a|b|c|d|3|e a|b|c|d|2|e);print fieldsort "\\\|",["5n"],@a'
+
+perl -wle 'print "\\\|"'
+
+perl -wle '@a=qw/a|b|c|d|3|e a|b|c|d|1|e a|b|c|d|2|e/;$,="\n";print sort {(split /|/,$a)[8] <=> (split /|/,$b)[8]} @a'
+
+perl -wle '$,=" ";@a=qw(a|b|c|d|1|e a|b|c|d|3|e a|b|c|d|2|e);print sort {(split/\|/,$a)[4]<=>(split/\|/,$b)[4]} @a'
+
+perl -wle 'print unpack("n", "hat")'
+
+perl -wle 'print unpack("n", "ha")'
+
+perl -wle 'print map{sprintf"\\%o",$_} unpack"C*","ha"'
+
+perl -wle 'print unpack("n","\150\141")'
+
+perl -wle '@x=qw(sheep sheep sheep);$n=0;foreach(@x){$n++;}print "You have $n sheeps in your barn;'
+
+perl -?
+
+perl -we 'use LWP2'
+
+perl -we '@a=@b=(a..z);foreach $a (@a){foreach(@b){print "$a$_, "}}'
+
+perl -wle 'open(F1,"file1")||die$!;@f1=<F1>;open(F2,"file2")||die$!;while(<F2>){$n=grep(/$_/,@f1);push(@unique,$_) if $n==0;}'.... I am not sure if it will work precisely 
+
+perl -le 'open(F1,"a");@f1=<F1>;open(F2,"b");while(<F2>){push(@u,$_) if !/$f1[$i++]/;}print @u'
+
+perl -wle '$v=sprintf("%.2f",3.378);print $v'
+
+perl -wle '$v=sprintf(rand(10));print(int($v))||$v++;print $v if $v==0;' long and inefficient but never "0" :)
+
+perl -wle '$v=sprintf(rand(10));if($v!=0){print(int($v))}else{$v++;print(int($v))
+
+perl -wle '$v=rand(10);if($v!=0){print(int($v))}else{$v++;print(int($v))}' -> I guess this is never "0"
+
+perl -wle '$x=int(rand(10));if($x!=0){print $x;}else{$x++;print $x;}' -> shorter a bit
+
+perl -wle '$x=int(rand(10));if($x==0){$x++;}print $x;' -> even shorter :))
+
+perl -wle '@x=qw/a b c d e f/;$n=scalar(@x);for($i=0;$i<$n;$++@x){print "number of line: ",$n;}
+
+perl -wle '@x=qw/a b c d e/;for($i=0;$i<scalar(@array);$i++){print $_,": line:",$i;}
+
+perl -wle 'print index("ab","a")'
+
+perl -wle 'print index("ab","a")'
+
+perl -wle 'print index("ab","c")'
+
+perl -we 'use HTML::Entities;for(0..255){$_=chr;print"$_ is ";print encode_entities($_),"\n"}' | less
+
+perl -wle '@a=({cow => "red", milk => "white"});print $a[0]{cow}'
+
+perl -wle '@a=({a=>1},{b=>2},{c=>3},{d=>4},{e=>5},{f=>6},{g=>7},{h=>8},{i=>9},{j=>10});print $a[4]{e}'
+
+perl -wle 'print sprintf("%010d",55)'
+
+perl -wle 'print STDOUT length AF_INET'
+
+perl -wle 'print STDOUT int AF_INET'
+
+perl -wle '$,="-";$_="a|b,c";print split/[|,]/'
+
+perl -wle '$,="-";@a=qw/a|b|c d|e|f/;@b=map{/\|([^|]*)\|/}@a;print @b'
+
+perl -wle '@x=qw/a|b|c d|e|f/;@y=map{/([^|]*)([^|]*)\|/}@x;'print @y; -> this apparantly not working if I need: @y=/a b d e/;
+
+perl -wle '@x=qw/a|b|c d|e|f/;@y=map{/([^|]*)\|([^|]*)\|/}@x;print @y;'
+
+perl -wle '@z=qw/a b c/;foreach(@z){print $_;}' same as perl -wle '@z=qw/a b c/;foreach(@z){print;}'
+
+perl -wle 'use Socket;@cmd=("HELO pmwd.com", "MAIL FROM: <philip\@pmwd.com>", "RCPT TO: <$ARGV[0]>", "DATA", "From: Philip\nSubject: $ARGV[1]\n$ARGV[2]\r\n.\r","QUIT");socket(S,AF_INET,SOCK_STREAM,0) || die "$0: socket failed:$!";select((select(S),$|=1)[0]);connect(S,sockaddr_in(25,inet_aton("mail.pmwd.com")))||die "$0: connect failed: $!";recv(S,$b,200,0);foreach(@cmd){print S"$_";recv(S,$b,200,0);$b=~/^5/&&"mail server error: $b"}'"Philip@pmwd.com" "test" "this is a test"
+
+perl -0015 -wne "s#/\*[^*]*\*+([^/*][^*]*\*+)*/##gs;print" cCcom.c (where cCom.c is a short C program with comments inside)
+
+perl -0015 -wpne 's#/\*(.*?)\*/##gs'
+
+perl -wle '$f="filename";open(F,"$f")||die$!;$i=0;while(<F>){$i++;}print "Number of lines in $f: ", $i;'
+
+perl -wle 'print "Enter filename: ";$f=<STDIN>;chop($f);open(F,"$f")||die$!;$i=0;while(<F>){$i++;}print "Number of lines in $f: ", $i;')'
+
+perl -wle 'print "Enter filename: ";$f=<STDIN>;chop($f);open(F,"$f")||die$!;$i=0;while(<F>){$i++;}print "Number of lines in $f: ", $i;)' -> there
+
+perl -wle '$_="<<<";s/</" "/eg;print"#$_#"'
+
+perl -wle '$_="<<<";s/</ /g;print"#$_#"'
+
+perl -wle 'use POSIX"strftime";print strftime("%Y%m%d",localtime(time-86400))'
+
+perl -wle 'print 24 * 60 * 60'
+
+ perl -we '@a=1..9;foreach(@a){last if/5/;print"$_ "}print"hi "'
+
+ perl -we '@a=1..9;for($i=0;$i<@a;$i++){last if $a[$i] =~ /5/;print"$a[$i] "}print"hi ";for(;$i<@a;$i++){print"$a[$i] "}'
+
+ perl -wle '$f="filename_to_read";open(F,"$f")||die$!;@f=<F>;for($i=0;$i<scalar(@f);$i++){if($f[$i]=~/=+?/){print "<h1>",$f[$i-1],"</h1>\n";}else{print $f[$i];}}'
+
+ perl -wle '$f="filename_to_read";open(F,"$f")||die$!;@f=<F>;for($i=0;$i<scalar(@f);$i++){if($f[$i]=~/=+?/){print "<h1>",$f[$i-1],"</h1>\n";}else{print $f[$i];}}'
+
+ perl -wle '$f="file";open(F,"$f")||die$!;@f=<F>;for($i=0;$i<scalar(@f);$i++){chomp($f[$i]);if(($f[$i]!~/=/g)&&($f[$i+1])&&($f[$i+1]=~/=/g)){print "<h1>",$f[$i],"</h1>";}else{print $f[$i]}}'
+
+ perl -wle 'open F,"file";$/=undef;$_=<F>;s/\n(\w+)\n=/\n<h1>$1<\/h1>\n/;print'
+
+ perl -wle '@x=qw/a b c d e/;print "Index: ",$#x;for($i=0;$i<scalar(@x);$i++){print $x[$i]}'
+
+ perl -we 'open F,"file";@f=<F>;@f=grep {!/^40/} @f;print @f'
+
+ perl -wle 'open F,"file";$/=undef;$_=<F>;s/\n(\w+)\n=/\n<h1>$1<\/h1>\n/;s/^40.*\n//mg;print'
+
+ [pmartin@ragnarokk pmartin]$ perl -wle 'open F,"file";$/=undef;$_=<F>;s/\n(\w+)\n=+/\n<h1>$1<\/h1>\n/;s/^40.*\n//mg;print'
+
+ perl -we 'open(C,"/etc/httpd/conf/httpd.conf")||die$!;@c=<C>;close C;opendir(D,"/var/log/httpd/domainlogs/")||die$!;@dir=readdir(D);close D;foreach $x(@c){if($x=~/^(ErrorLog|TransferLog)/){chomp($x);@tmp=split(/\//,$x);print $tmp[$#tmp] unless grep(/^$tmp[$#tmp]$/,@dir)}}'
+
+ debian:~$ perl -we 'open(C,"/etc/apache/httpd.conf");while(<C>){$h{$1}=1 if m#^(?:ErrorLog|TransferLog) +.*/(.*)#}opendir D,"/var/log/apache";for(readdir D){print$_," "unless$h{$_}}'
+
+ perl -we 'open(C,"/etc/apache/httpd.conf")||die$!;@c=<C>;opendir(D,"/var/log/apache")||die$!;@dir=readdir(D);close D;foreach $x(@c){if($x=~/^(ErrorLog|TransferLog)/){chomp($x);@tmp=split(/\//,$x);print $tmp[$#tmp] unless grep(/^$tmp[$#tmp]$/,@dir)}}'
+
+ perl -we 'open(C,"/etc/apache/httpd.conf");while(<C>){$h{$1}=1 if m#^(?:ErrorLog|TransferLog).*/([^/]+)$#}opendir D,"/var/log/apache";for(readdir D){print$_," " unless $h{$_}}'
+
+ perl -we 'open(C,"/etc/apache/httpd.conf");while(<C>){push(@f,$1) if m#^(?:ErrorLog|TransferLog).*/([^/]+)$#}opendir D,"/var/log/apache";for $x (readdir D){print$x," " unless grep($_ eq $x,@f)}'
+
+ perl -we 'open(C,"httpd.conf")||die$!;while(<C>){if(/^ErrorLog|TransferLog/){chomp;@x=split(/\//,$_);$x{$x[$#x]}=1}}opendir(D,"/var/log/httpd/domainlogs")||die$!;for(readdir D){push @tmp,$_ unless exists $x{$_}}$,="\n";print @tmp'
+
+ perl -wle '$h{2+2}="oh";print $h{4}'
+
+ perl -we 'open(C,"httpd.conf")||die$!;while(<C>){if(/^ErrorLog|TransferLog/){chomp;@x=split(/\//,$_);$x{$x[$#x]}=1}}opendir(D,"/var/log/httpd/domainlogs")||die$!;for(readdir D){print $_,"\n" unless exists $x{$_}||(/^\.+/)}'
+
+ thanks: perl -we 'open(T,">test")||die$!;print qx/ls/;unlink("test");print qx/ls/' ->pretty selfexplanatory :)
+
+ debian:~$ perl -wle 'print "hi"' -- oh ok I see
+
+ debian:~$ perl -wle 'print "hi @ARGV"' -- oh ok I see
+
+ debian:~$ perl -w test.pl
+
+ perl -we '@x=qw/a b c d e f/;for(@x){$x{$_}=1}foreach(keys %x){print $_,":",$x{$_}," "}'
+
+ perl -we '@x=qw/a b c d e f/;for(@x){$x{$_}=1}each(keys %x){print $_,":",$x{$_}," "}'
+
+ perl -we '@x=qw/a b c d e f/;for(@x){$x{$_}=1}each(%x){print $_,":",$x{$_}," "}'
+
+ perl -we '@x=qw/a b c d e f/;for(@x){$x{$_}=1}foreach(%x){print $_,":",$x{$_}," "}'
+
+ perl -we '@x=qw/a b c d e/;$i++;for(@x){$hash{$_}=$i++}while(($key,$value)=each %hash){print $key,"=>",$value,"|"}'
+
+ perl -wle '@x=qw/a b c d e f/;@z=qw/c d e f g h/;for(@x){$x{$_}=1}map{check($_)}@z;sub check{if(@_){print $_ if exists $x{$_}}}'
+
+ perl -we '@x=qw/a b c d e/;$i++;for(@x){$hash{$_}=$i++}while(($key,$value)=each %hash){print $key,"=>",$value;LAST if !$value;print "|"}'
+
+ debian:/tmp$ perl -wle 'use Fcntl;use NDBM_File;tie( %h, NDBM_File, "Op.mdbx", O_RDWR|O_CREAT, 0640 );$h{k1}="v1"'
+
+ debian:/tmp$ perl -wle 'use Fcntl;use NDBM_File;tie( %h, NDBM_File, "Op.mdbx", O_RDWR|O_CREAT, 0640 );print "<$h{k1}>"'
+
+ perl -wle "print qq(\"Hello World\"\n);"
+
+ perl -wle 'sub s1{print ${ $_[0] }{"k1"}};%h=(k1 => "ok");s1(\%h)'
+
+ perl -wle '@x=qw/a|b|c|d f|g|h|i/;$new="X";for(@x){if(/c/){$_=~s/$1/$new/}}$,="\n";print @x'
+
+ debian:~$ perl -wle 'print' -e '"hi'
+
+ perl -wle '@x=qw/a|b|c|d f|g|h|i/;$new="X";for(@x){' -e 'if(/c/){$_=~s/$1/$new/}}$,="\n";print @x'
+
+ perl -wle '3=~/3/;print "<$1>"'
+
+ perl -wle '3=~/(3)/;print "<$1>"'
+
+ perl -wle '@x=qw/a|b|c|d f|g|h|i/;$new="X";for(@x){if(/c/){$_=~s//$new/}}$,="\n";print @x'
+
+ perl -wle '3=~/(.)/;print "wow" =~ //'
+
+ perl -wle '$x=5;print $x*3'
+
+ perl -wle '$b="dum";$b=$b x3;print $b'
+
+ perl -wle '$x="One\nTwo\nThree";@x=split(/\n/,$x);$i=0;for(@x){print $x[$i++]}'
+
+ perl -wle '$x="One\nTwo\nThree";@x=split(/\n/,$x);$i=0;print map{"$x[$i++]\n"}@x'
+
+ perl -wle '$SIG{ALRM}=sub{print "timeout";exit};eval{alarm(1);while(1){print "."}}'
+
+ perl -wle '@fields=qw/name address city/;for("0".."2"){$entry=join(":",@fields);$hash{$_}=$entry}print map{"$_=>$hash{$_}\t"}keys %hash'
+
+ perl -wle '@fields=qw/name address city/;for("0".."2"){$hash{$_}=join(":",@fields)}print map{"$_=>$hash{$_}\t"}keys %hash'
+
+ perl -wle '@fields=qw/name address city/;for("0".."2"){$hash{$_}=join(":",@fields)}delete $hash{2};print map{"$_=>$hash{$_}\t"}keys %hash'
+
+ perl -wle '@fields=qw/name address city/;for("0".."2"){$hash{$_}=join("$_:",@fields)}@keys=keys %hash;for($i=0;$i<scalar(@keys);$i++){if($keys[$i]==1){delete $hash{$keys[$i]};$i=$i-1}else{$hash{$keys[$i]}=join(":$i",@fields)}}print map{"$_=>$hash{$_}\t"}keys %hash'
+
+ perl -we 'sub s1{ $age = shift || 55; $sex = shift || "male"; $job = shift || "programmer"; print "you are $age year old $sex $job\n" } s1()'
+
+ perl -we 'sub s1{ $age = shift || 55; $sex = shift || "male"; $job = shift || "programmer"; print "you are $age year old $sex $job\n" } s1(16,"female")'
+
+perl -wle 'use Socket;socket(S,AF_INET,SOCK_STREAM,0);select S;$|=1;select STDOUT;connect(S,sockaddr_in(80,inet_aton($ARGV[0])));print S "HEAD / HTTP/1.0\n\n";print <S>' www.yahoo.com
+
+perl -wle 'use Socket;socket(S,AF_INET,SOCK_STREAM,0)||die "socket:$!";select S;$|=1;select STDOUT;connect(S,sockaddr_in(80,inet_aton($ARGV[0])))||die "connect:$!";print S "GET / HTTP/1.0\n\n";print <S>' www.yahoo.com     that is the same code with a few die()s added
+
+  something like: perl -wle 'use Socket;foreach(@ARGV){socket(S,AF_INET,SOCK_STREAM,0)||die "socket:$!";select S;$|=1;select STDOUT;connect(S,sockaddr_in(80,inet_aton(shift)))||die "connect:$!";print S "GET ",shift," HTTP/1.0\n\n";print <S>;close S}' www.yahoo.com / www.pmwd.com /
+
+ perl -wle '$_="Hi there Mr. X (aka. Joe X)";print $1 if /^((\w+\s)+[^(])/i'
+
+ perl -wle '$_="Hi there Mr. X (aka. Joe X)";print $1 if /^(.*?\s+)+[^{]/'
+
+ perl -wle '$_="Hi there Mr. X (aka. Joe X)";print $1 if /^((.+?\s+)+[^(])/'
+
+ perl -wle '$_="Hi there Mr. X (aka. Joe X)";print $1 if
+
+ perl -wle '$_="Hi there Mr. X (aka. Joe X)";s/\([^)]*\)//;print'
+
+ perl -wle 'sub PI(){return 3.14}print PI'
+
+ perl -wPle '#define PI 3.14' -e 'print PI'
+
+ debian:~$ perl -wle 'print index("abc","c")'
+
+ perl -wle 'print index("abc","a")'
+
+ perl -wle 'print index("abc","z")'
+
+ perl -we 'use LWP::Simple; getstore "http://somesite/somepage.txt","file.txt"'
+
+ perl -e '$a = shift; while(mkdir($a, 0755)) { chdir $a; }' moritz_is_a_disgrace_to_the_animal_kingdom
+
+ perl -wle '@lines=<>;@emails=map {/(\w+\@\w+\.\w+)/} @lines;print @emails' email_file
+
+ perl -wle '@lines=<>;@emails=map {(/(\w+\@\w+\.\w+)/g)}
+
+ perl -wle '@x=qw/a b c d e/;for("0".."4"){$hash{$_}=$x[$_]}print "BEFORE: ",map{"$_=>$hash{$_} "}keys %hash;delete $hash{2};@val=values %hash;for($i=0;$i<scalar(@val);$i++){$new_hash{$i}=$val[$i]}print "AFTER: ",map{"$_=>$new_hash{$_} "}keys %new_hash'
+
+ perl -we '$h{2}="oh";print"<$h{2}>";delete $h{2};print"<$h{2}>"'
+
+ perl -we 'use DB_File;use Fcntl;tie(%h,"DB_File","dbfile.db",O_RDWR|O_CREAT,0600);$h{2}="oh"'
+
+ perl -wle 'use DB_File;use Fcntl;tie(%h,"DB_File","dbfile.db",O_RDONLY,0600);print"<$h{2}>"'
+
+ perl -we 'use DB_File;use Fcntl;tie(%h,"DB_File","dbfile.db",O_RDWR,0600);delete $h{2}'
+
+ perl -wle 'use DB_File;use Fcntl;tie(%h,"DB_File","dbfile.db",O_RDONLY,0600);print"<$h{2}>"'
+
+ perl -wle '$_=bless(\$_,"main");print $_'
+
+ perl -wle '$_=bless(\$_,"main");print ref($_)'
+
+ perl -wle '$_="plain";print "<",ref($_),">"'
+
+ perl -le '$h="192.168.0.254";use Socket;use Fcntl;socket(S,AF_INET,SOCK_STREAM,0)||die"s:$!";$f=fcntl(S,F_GETFL,0);fcntl(S,F_SETFL,$f|O_NONBLOCK);vec($s,fileno(S),1)=1;connect(S,sockaddr_in(13,inet_aton($h)));$t=5;($nfound,$timeleft)=select($r=$s,$w=$s,$e=$s,$t);fcntl(S,F_SETFL,$f);$er=getsockopt(S,SOL_SOCKET,SO_ERROR);print "\n",scalar localtime;if($nfound == 2 && $er eq "\0\0\0\0"){print "Connected to $h in ", $t-$timeleft, "s with ${timeleft}s left before givi
+
+ time perl -we 'use Socket;socket(S,AF_INET,SOCK_STREAM,0)||die"s:$!";eval{local $SIG{ALRM} = sub{die "Timeout\n"}; alarm 1;connect S,sockaddr_in 13,inet_aton"192.168.0.240"};if ($@ and $@ !~ /Timeout/) { die; }else{print <S>}'
+
+ one second just what  perl -v  version are you using?
+
+ perl -we 'use Socket;socket(S,AF_INET,SOCK_STREAM,0)||die"s:$!";eval{local $SIG{ALRM} = sub{die "Timeout\n"}; alarm 1;connect(S,sockaddr_in 13,inet_aton"192.168.0.234")||die $!};if ($@) { die "connect: $@"; }else{print <S>}'
+
+ perl -wle 'use Socket;socket(S,AF_INET,SOCK_STREAM,0)||die"s:$!";eval{local $SIG{ALRM} = sub{die "Timeout\n"}; alarm 1;connect(S,sockaddr_in 13,inet_aton"192.168.0.233")||die $!;alarm 0};print <S>;print scalar(localtime)," $!"'
+
+ debian:/proc/net$ perl -wle 'while(1){@ARGV="arp";$/="";$_=<>;last if !/233/;sleep 1}print;print scalar localtime'
+
+ perl -wle '$start = (40*60)+53; $end = (45*60)+39;$d=$end - $start;print "$d seconds or ",substr gmtime $d,14,6'
+
+ perl -wle '$count = () = "oh oh oh" =~ /oh/g;print $count'
+
+   perl -p -e 's/("include ").*?$path(:cc_adapt)/$1$2/;'
+
+ perl -wle '$_="This is a sample string about box and boxes which are box and boxes";$_=~s/box /thebox1 /g;$_=~s/boxes /theboxes1 /g;print'
+
+ perl -wle '$var="box boxes";$var=~s/(box(?:es)?)/the${1}1/g;print$var'
+
+ perl -wle '$v="http://oh.no/a/page";$v=~s#(http://\S+)#<A HREF="$1">$1</A>#g;print$v'
+
+ guys, I got interested with this box/boxes task but I cannot get it to work with: perl -we '$_="box and boxes which are box and boxes";for(split(/ /,$_)){if(/^(box(.)+?)/){$_=~s/box(.)+?/the$1/;print $_," "}else{print $_," "}}'.... can you help me understand or example will do, please?
+
+ perl -wle '$var="box boxes";$var=~s/(box(?:es)?)/the${1}1/g;print$var'
+
+ I am trying to use Net::FTP in the following simple example: perl -wle 'use Net::FTP;$ftp=Net::FTP->new("<host>");$ftp->login("<user>","<pass>");$ftp->cwd("bin");$d=$ftp->("ls");$ftp->quit;print $d' and this is the message I am getting: Not a CODE reference at -e line 1. Can someone tell me what does that mean?
+
+ perl -wle 'print 12%5'
+
+ perl -we 'for($i=0;$i<7;$i++){print scalar(localtime(time+(86400*$i)))," "}'
+
+ perl -we 'use POSIX"strftime";for($i=0;$i<7;$i++){print strftime("%A ",localtime(time+(86400*$i)))}'
+
+ perl -we 'use POSIX"strftime";for($i=0;$i<7;$i++){print strftime("%A %d/%m/%y ",localtime(time+(86400*$i)))}'
+
+ I use perl -we '    '  so that I can run the script from the command line without having to start up an editor and put it in a file so that I can test stuff out.
+
+ perl -we '  ' can be left out entirely from your script
+
+ perl -we 'use Date::Format;for($i=0;$i<7;$i++){@a=localtime(time+(86400*$i));print strftime("%A %d/%m/%y ",@a)}'
+
+ C:\> perl -v   <- running that from the command line should say
+
+ anyway I walked over to a win95 system that has ActivePerl   C:\> perl -we "use POSIX q(strftime);print strftime(q(%A),localtime)"  worked. it print'd Friday
+
+ debian:~$ echo hi | perl -we 'while(<>){print}'
+
+ debian:~$ echo hi | perl -we 'while(<> and 1){print}'
+
+ debian:~$ echo hi | perl -we 'while(defined($_ = <>) and 1){print}'
+
+ perl -we '@x=qw/a b c d e f/;for(@x){print}'
+
+ perl -we 'use strict;@x=qw/a b c d e f/;for(@x){print}'
+
+ you are right:perl -we 'use strict;my @x=qw/a b c d e f/;for(@x){print}'
+
+ DarcyB:  yeah, perl -wle '$n=3.56353464;$rn=sprintf("%.3f",$n);print $rn'
+
+ debian:~$ perl -wle 'print pack"N",4294967294' | less
+
+ debian:~$ perl -wle '$,=":";print getpwnam("lzh")'
+
+ perl -wc yourscript.pl   will check that the syntax is correct in your script without running it
+
+ perl -wle '$v="oh1no";$v=~s/(oh)(\d)(no)/$1 . ($2+1) . $3/e;print $v'
+
+ perl -wle 'print readlink("q");'
+
+ debian:~$ ln -s test tested ; perl -wle 'print"(",readlink("tested"),")"'
+
+[Coder^] perl -wle "use CGI;print $CGI::VERSION;"  > 2.42
+
+ perl -wle 'use HTML::Parse;print $INC{"HTML/Parser.pm"}'
+
+ perl -we 'use HTML::Parse;$h=parse_html(q(<TR><TD>Tutorial</TD><TD>1</TD><TH>Item</TH><TH>Quantity</TH><TH>Each</TH><TH>Total</TH></TR><TR>));print $h->as_HTML'
+
+ perl -we 'use HTML::Parse;$h=parse_html(q(<td>b</td><th>a</th>));print $h->as_HTML'
+
+ perl -we 'use HTML::Parse;$h=parse_html(q(<td>b</td><th>a</th>));$h->dump'
+
+  perl -we '$a=<>; print $a; $a =~ tr/x//d; print $a;'
+
+ perl -MCPAN -e shell   then at the cpan> prompt a simple  install Date::Parse  and it does all the hard work of retrieving/unpacking/compiling/testing/installing for you.
+
+ debian:/tmp$ perl -wle 'use File::Find;finddepth(sub{if(-f){unlink}elsif(-d _){rmdir}},"a")'
+
+ debian:/tmp$ perl -wle 'use File::Find;finddepth(sub{if(-f){unlink||die"unlink: $File::Find::name: $!"}elsif(-d _){rmdir||die"rmdir: $File::Find::name: $!"}},"a")'
+
+ Andrew_B -> perl -wle '$_="24.98795";$_=sprintf("%.2f",$_);print'
+
+  perl -we 'print "\"\n"'
+
+ perl -we 'print "\"qwejirnjqonb4o1ij\"\n"'
+
+  perl -we 'print qq(\"qwejirnjqonb4o1ij\")'
+
+ perl -we 'print qx(date)'
+
+ perl -we 'print `date`'
+
+ perl -wle 'print "Email: ";chomp($m=<STDIN>);print "OK" if $m=~/^.+\@.+\..+/'
+
+ perl -we 'while(<>){print $1 if /\s(\S+?@\S+?)\s/}'
+
+ perl -wle '@x=qw/abc abc@abc abc.abc@abc.ab adb c@/;for(@x){print $1 if /(.+\@.+\..+)/}'
+
+ perl -wle 'print "Email: ";chomp($m=<STDIN>);print "OK" if $m=~/.+\@.+\..+/'
+
+ perl -wle 'print "Email: ";chomp($m=<STDIN>);print "OK" if $m=~/^.+\@.+\..+/'
+
+ perl -wle 'print "Email: ";chomp($m=<STDIN>);print "OK" if $m=~/.+\@.+\..+/'
+
+ perl -wle 'print "Email: ";chomp($m=<STDIN>);print "OK" if $m=~/^.+\@.+\..+/'
+
+ perl -wle 'system("echo \\\"bob\\\"")
+
+  perl -we 'while(<>){print $1 if /\s(\S+?@\S+?)\s/}'
+
+ debian:~/perl/manual$ time perl -we 'use strict;my%h;$^I="";while(<>){if(s#<A NAME="([^"]+)">##){print STDOUT "$ARGV#$1\n";print qq(<pre><a name="$1" href="#$1">f</a>rag:http://cpan.org/doc/manual/html/pod/$ARGV#$1</pre>\n) if !$h{$1}++}print;%h=()if eof}' `find * -type f`
+
+ perl -wle '@x=qw/a b c d e/;$a=1;$c=2;for(@x){unless(${$_}eq""){print $_," exists!"}}'
+
+ perl -wle 'use strict;my @x=qw/a b c d e/;my $a=1;my $c=2;for(@x){unless(${$_}eq""){print $_," exists!"}}'
+
+* mortum_:#perl -> just academic try :)
+
+ perl -wle 'use strict;my(@x,$a,$c);@x=qw/a b c d e/;$a=1;$c=2;for(@x){unless(${$_}eq""){print $_," exists!"}}'
+
+ perl -wle '@x=qw/a b c d e/;$a=1;$c=2;for(@x){if(defined ${$_}){print $_," exists!"}}'
+
+ perl -wle '@a=(["c","d"],["a","b"]);@b=sort {@{$a}[1] cmp @{$b}[1]} @a;print @{$b[0]},"\n",@{$b[1]}'
+
+ perl -wle '@x=qx|cat /etc/virtusertable|;undef %hash;for(@x){unless(/^(\s+|#)/){@tmp=split(/\s+/,$_);$hash{$tmp[1]}=$tmp[0]}}print map{"$hash{$_} $_\n"}sort(keys(%hash))' -> here is my simplier solution to the problem :))
+
+ perl -wle '@a=(1..5);print @a;'
+
+ perl -we 'while(<>){print if /^is$/ .. /^like$/}' perlt
+
+ hellkid: if youre using a unix based version of perl, you should be able to do perl -e "print \"hello world\n\";"
+
+ hehe perl -we 'use ModuleName'
+
+ perl -ce problably would have been better
+
+ perl -wle '$u=0;$g=0;system("chown -R $u.$g ./stor")'
+
+ perl -wle '$u=0;$g=0;system("chown","-R","$u.$g","./stor")'
+
+ debian:/tmp# mkdir -p a/b;perl -wle '$u=10;$g=10;system("chown -Rv $u.$g a")'
+
+ debian:/tmp# mkdir -p a/b;perl -wle '$u=0;$g=0;system("chown","-Rv","$u.$g","a")'
+
+ Ragna, how come it prints --stop-- as well in: perl -wle '$x=qx|cat test|;print "FILE:\n",$x;print $1 if $x=~/--start--(.+\s)[^-]/'
+
+ debian:~/.cpan/sources$ zcat 02packages.details.txt.gz | perl -we 'use HTML::Parse;$p="^(".join("|",map{s#/#::#g;s#\.pm##;$_}keys%INC).")";while(<>){push@{$h{$2}},$1 if m#$p.*/(\S+)$#o}for$p(sort keys%h){print"modules(";for(sort@{$h{$p}}){print"$_ "}print") from package($p), "}'
+
+ debian:~$ perl -wle '$hash{key}=["oh"];$,=" ";print ${$hash{key}}[0],$hash{key}[0],$hash{key}->[0]'
+
+ perl -wle 'print "Enter pass: ";chomp($pass=<STDIN>);@salt = ("a".."z","A".."Z","0".."9");$salt = $salt[rand(scalar(@salt))].$salt[rand(scalar(@salt))];$password = crypt($pass,$salt);print "Encrypted passwd: ",$password'
+
+ debian:~$ perl -wle '$_="pearl";s/\b(p)earl\b/${1}erl/i;print'
+
+ what am I doing wrong here, please tell me: perl -wle '@x=qw/a b c d e/;$i=0;$tmp="X";for(@x){if($i==1){splice(@x,$i,1,$tmp);$i++}}$,="|";print @x'
+
+ my perl -wle isn't seting $,
+
+ perl -we 'printf"%#o\n",ord"-"'
+
+ perl -wl055e 'print"h";print"i"'
+
+ perl -we '$\="\\/";print"h";print"i"'
+
+ perl -wle '$,=" you sure? ";print"H","I ;-)"'
+
+ perl -wle 'use MIME::Lite;$msg = new MIME::Lite From=>"me\@myhost.com", To=>"you\@yourhost.com",Subject=>"Some Subject",Type=>"TEXT",Type=>"multipart/mixed",Data=>"Here is the Data you wanted!";print $msg->as_string'
+
+ perl -wle '@a = qw/ a b c d e/;  splice @a,1,1; print "@a"'
+
+ C:\> perl -w yourscript.pl | more
+
+ perl -wle 'use CGI;print CGI::escape("but it does one thing")'
+
+ perl -wle 'use CGI;print CGI::unescape("but%20it%20does%20one%20thing")'
+
+ perl -wle 'use CGI;print CGI::escape(" !#$%&()*+,-./:;<=>?[\]^_`{|}~")'
+
+ perl -wle 'use CGI;print CGI::unescape("%20%21%230%26%28%29%2A%2B%2C-.%2F%3A%3B%3C%3D%3E%3F%5B%5D%5E_%60%7B%7C%7D%7E")'
+
+ debian:~$ perl -wle 'print "" =~ /\s*/ ? "y" : "n"'
+
+ perl -wle 'print "" =~ /\s+/ ? "y" : "n"'
+
+ perl -wle 'print " " !~ /[^ ]/ ? "y" : "n"'
+
+ perl -wle ' $b=""; print($b =~/ *$/)'
+
+ perl -wle ' $b=""; print($b =~/^ *$/)'
+
+ debian:~$ perl -wle 'sub s1{ sub s2{ print "s2"}; s2}; s1'
+
+ C:\> perl -we "opendir(D,qq(.));$,=qq( );print readdir(D)"  <- if you do that at the C:\> prompt does it work?
+
+ C:\> perl -we "opendir(D,qq(.));$,=qq( );print readdir(D)"  <- if you do that at the C:\> prompt does it work?
+
+ C:\> perl -we "opendir(D,qq(.));foreach $dir (readdir(D)) { print qq($dir\n) }"  <- guess you could try that too
+
+ perl -wle '$_="";vec($_,0,1)=1;print unpack"b*",$_'
+
+ perl -wle '$_="";vec($_,0,1)=0xff;print unpack"b*",$_'
+
+ perl -wle '$_="";vec($_,0,4)=0xff;print unpack"b*",$_'
+
+ perl -wle '$_="";vec($_,0,7)=0xff;print unpack"b*",$_'
+
+ perl -wle '$_="";vec($_,0,7)=1;print unpack"b*",$_'
+
+ perl -we '$|=1;system("stty raw opost onlcr -echo < /dev/ttyS1");open(M,"+</dev/ttyS1");$s=fileno(STDIN);$m=fileno(M);$b="";vec($b,$s,1)=1;vec($b,$m,1)=1;while(select($r=$b,undef,undef,undef)){if(vec($r,$s,1)){$_=<>;printM}elsif(vec($r,$m,1)){sleep 1;sysread(M,$_,1024);print}}'
+
+ perl -> only interpreted
+
+ perl -wle '@entry=qw/blah foo bar/;pop(@entry);$,=" : ";print @entry'
+
+ perl -we '$_="blah\nfoo\nbar";$_=~s/.+[^\n]$//;print'
+
+ perl -we 'use Socket;socket(S,AF_UNIX,SOCK_STREAM,0)||die"s:$!";connect(S,sockaddr_un("/dev/log"))||die"c:$!";($t)=localtime=~/\w+ (.*) \d+/;print S"<",(8<<3)+5,">$t perltest: blah blah\0"'
+
+ perl -e ' @A=('A'..'Z'); print @A'
+
+ perl -wle 'use Term::ReadKey;ReadMode 3;$_=ReadKey 0;print;ReadMode 0'
+
+ perl -we 'use HTML::HeadParser;$h = HTTP::Headers->new; $p = HTML::HeadParser->new($h); $p->parse("<title>hello</title><meta name=owner content=wow>");printf"title<%s> owner<%s>\n",$h->title,$h->header("x-meta-owner")'
+
+ perl -we 'require "dumpvar.pl";use HTML::Parse;$h = parse_html("<meta name=owner content=wow>");print dumpvar("main::","h")'
+
+ perl -we 'require "dumpvar.pl";use HTML::Parse;$h = parse_html("<meta name=owner content=wow>");dumpvar("main::","h")'
+
+ perl -we 'use HTML::Parse;$h = parse_html("<meta name=owner content=wow>");$h->traverse(sub{$r=$_[0]->content;print $_[0]->tag,": ";$,=" ";for(@$r){if(ref eq ""){print}else{print keys %$_}}print "\n"},1)'
+
+ perl -wle '$,="\n";print @INC'
+
+ perl -we '$,=", ";print" ";print @INC,"\n"'
+
+ perl -we 'print $ARGV[0]."\n"' hello
+
+  perl -we '$a="1"; ${$a}="jack";print ${$a}'
+
+ perl -we '$a="b"; ${$a}="jack\n";print ${$a}'
+
+ perl -wle '$,=" ";$a{a}=1;$a{b}=2;print values %a;'
+
+ perl -we '%age=qw(fred 5 joe 3);foreach $key ( sort { $age{$b} <=> $age{$a} } keys %age ){ print "$key $age{$key} " }'
+
+ perl -we '%age=qw(fred 5 joe 3);foreach $key ( sort { $age{$a} <=> $age{$b} } keys %age ){ print "$key $age{$key} " }'
+
+ perl -we 'use Benchmark;@b=1..1000;timethese(1000,{"for" => q[my@a;for(@b){push@a,$_}],"map" => q[my@a;push @a,map {$_} @b ]})'
+
+ lzh, I am trying to run  this version of your code [to understand and remember the syntax]: perl -wle 'use Benchmark;$a=1..1000;timethese(1000{"for"=>q[my @b;for(@a){push $b,$_}],"foreach"=>q[my @b;foreach $x(@a){push @b,$x}]})' and this is what I am getting: Can't use subscript on constant item at -e line 1, near "q[my @b;foreach $x(@a){push @b,$x}]}" -> I am not sure that I  understand...
+
+ perl -we 'use Benchmark;$a=1..1000;timethese(1000,{"for"=>q[my @b;for(@a){push @b,$_}],"foreach"=>q[my @b;foreach $x(@a){push @b,$x}]})'
+
+ perl -wle '%1=(0=>"A",1=>"B");print map{"$_ : $1{$_}\n"}keys %1'
+
+ perl -wle '$bday="16/4/1980";use Date::DateCalc ":all";use Date::DateCalcLib ":all";($y,$m,$d) = calc_new_date(1,1,1,dates_difference(decode_date($bday),parse_date(scalar localtime)));$y--;$m--;$d--;print "If your birthday is $bday you are $y years $m months and $d days old!"'
+
+ perl -wle '$bday="16/4/80";use Date::DateCalc ":all";use Date::DateCalcLib ":all";($y,$m,$d) = calc_new_date(1,1,1,dates_difference(decode_date($bday),parse_date(scalar localtime)));$y--;$m--;$d--;print "If your birthday is $bday you are $y years $m months and $d days old!"'
+
+ debian:~$ perl -wle 'use Date::Manip;print +(UnixDate("12/05/99","%s") - UnixDate("10/10/98","%s"))/(24*60*60)'
+
+ perl -wle 'use Date::Parse;print int( (str2time("12/05/99") - str2time("10/10/98"))/(24*60*60) )'
+
+ perl -we 'require HTML::Parser;$d = "<klkjlk>ppppppppppppppp</lkjljlkj>";$p = HTML::Parser->new; $p->parse($d);$p->eof;print $p;require "dumpvar.pl";dumpvar("main::","p")'
+
+ perl -wle 'use LWP::simple; foreach(@ARGV[0]) { s/>[^>]*>//g; print; }
+
+ perl -wle 'use LWP::Simple; foreach(get $ARGV[0]) { s/<[^>]*>//g; print; }' http://localhost
+
+ try this one : perl -wle 'use LWP::Simple; foreach(get $ARGV[0]) { s/<[^>]*>//g; print; }' http://localhost
+
+ perl -wle 'use LWP::Simple;for(@ARGV){print;getprint$_}' http://localhost/ http://localhost/doc/ | less
+
+ perl -we '@x=qw/a b c d/;for(@x){print $_," "}'
+
+ perl -we '@x=("a","b","c","d");for(@x){print $_," "}'
+
+ perl -we '@x=qw/a b c d/;for(@x){print $_," "}'
+
+ perl -we '@x=("a","b","c","d");for(@x){print $_," "}'
+
+ oBITUs: perl -wle "print qq(hello world\n\n);"
+
+ perl -we "$,='|';print @ARGV" blah foo bar
+
+ perl -we 'undef %hash;for("a".."e"){$hash{$_}=1}print "BEFORE:\n",map{$_,":",$hash{$_}," "}keys %hash;%hash=();print "\nAFTER",map{$_,":",$hash{$_}," "}keys %hash'
+
+ perl -we 'use Module;'
+
+ perl -we '%s=("file1"=>{mode=>777,uid=>500,gid=>500,size=>20000},"file2"=>{name=>"file two",mode=>755,uid=>501,gid=>501,size=>25000});foreach(keys %s){print "\n$_";foreach $k (keys %{$s{$_}}){print "$k = $s{$_}{$k}\n";}}'
+
+ [jay@x14y123 jay]$ perl -ce 'use IO::Socket'
+
+ [jay@x14y123 jay]$ perl -ce '$x =use IO::Socket'
+
+ perl -wle ' use IO::Socket;$sock
+
+ perl -wle ' use IO::Socket;$sock
+
+ perl -wle ' use IO::Socket;$hashy{wow}[3] = IO::Socket::INET->                                               new(PeerAddr =>"localhost",PeerPort=>"finger", Proto => "tcp");$hashy{wow}[3]->pr                                               int("\n");print $ha
+
+ hell if your forced to use sh you could just embed a few perl statements in it with perl -e :)
+
+ strict.pm comes with perl. perhaps you have an old version of perl?  what does version does c:\> perl -v  report?
+
+ debian:~$ perl -wle '@a=1..2;@b=3..4;push @a,@b;print @a'
+
+ debian:~$ perl -wle 'print "\cz"' | cat -v
+
+ perl -wle 'print "\cz\t\e"' | cat -A
+
+ perl -we 'require"dumpvar.pl";dumpValue("some \cz\t\e text")'
+
+ perl -e 'use POSIX "strftime"; print strftime("%A",localtime),"\n";'
+
+  perl -e '@WeekDay=("Sunday", "Monday", "Tuesday", "Wednesday","Thrusday
+
+ debian:~$ perl -wle 'require 5.004'
+
+ perl -we '$f="/";$t=time;utime($t,$t,$f)||print"utime on $f failed: $!\n"'
+
+ quick question: I am trying: perl -wle '$_=qx/ps aux|grep \"sendmail: acceptingX\"/;print' and I need to make construct like: while(qx/ps aux|grep \"sendmail: acceptingX\"/==FALSE){do something} but cannot figure that out... how would you write this while condition?
+
+* mortum_:#perl -> got extra space deleted :)
+
+ perl -wle 'use LWP::Simple qw(head);$url=shift;@x=head($url);$,="|";print @x;' http://www.vab.com
+
+ perl -wle '$_="00503";$_++;print'
+
+ you mean the perl -MCPAN -e shell   cpan shell?  not sure but I think I tried and it failed once long ago
+
+ perl -wle 'for("a".."g"){$x{$_}=1};print scalar %x'
+
+ perl -wle 'for("a".."g"){$x{$_}=1};print scalar keys %x'
+
+ perl -wle 'use LWP::UserAgent;$obj = LWP::UserAgent->new();$url=shift;$response = $obj->request(HTTP::Request->new("HEAD",$url));print scalar(localtime($response->last_modified))' http://www.yahoo.com
+
+ perl -wle 'use DBI' will answer that
+
+ perl -wle 'sub s1{0};s1 || $_ = 1;print"works"'
+
+ perl -wle 'sub s1{0};s1 or $_ = 1;print"works"'
+
+ unix$ perl -we 'exec "rcp -r jupiter:/root/etc/capacity_jupiter.pl /root/etc/log";'  <- you are saying that it doesn't work like that?
+
+ perl -we 'use Expect;$e=Expect->spawn("sh");$e->log_stdout(0);$e->send_slow(0,"uptime\r");$e->expect(undef,"-re",q(\d.*\r));print"uptime<",substr($e->exp_match(),0,-1),">\n"'
+
+ perl -wle '$f="testfile";qx/touch $f/;print "DIR: ",qx/ls -l $f/;if(-f $f){print "OK"}'
+
+ perl -wle '$d=".";opendir(D,$d)||die$!;@dir=readdir(D);for(@dir){$dir{$_}=1}print "OK" if exists $dir{test}'
+
+ perl -wle 'if(exists "$ENV{home}/test"){print "OK"}'
+
+ perl -wle 'print $ENV{_}'
+
+ sure there's an $ENV{ } you can print your whole env by doing  perl -wle 'for(sort keys%ENV){print"$_=$ENV{$_}\n"}' | less
+
+ echo>file;perl -wle '$_="file";$a=\-e();'
+
+ echo>file;perl -wle '$a=\-e();'
+
+ perl -wle '$_=\substr("wow I did not know you could do that",0,3);print'
+
+ perl -wle '$_=\substr("wow I did not know you could do that",0,3);print$$_'
+
+* mortum_:#perl -> sleeping beauty....
+
+ perl -wle 'system"stty -echo</dev/tty";$pass=<STDIN>;chomp($pass);print"pass<$pass>";system"stty echo</dev/tty"'
+
+ perl -wle 'system"stty -echo</dev/tty";$pass=<STDIN>;chomp($pass);print"pass<$pass>";system"stty echo</dev/tty"'
+
+ linux:~$ perl -wle 'system"stty -echo</dev/tty";$pass=<STDIN>;chomp($pass);print"pass<$pass>";system"stty echo</dev/tty"'
+
+ linux:~$ perl -we 'system("stty -echo raw");$bk=qx(tput kbs);$c=$l="";$i=0;while(1){$c=getc;last if $c eq "\r";if($c eq $bk){chop($l) && print"\b \b" if $l}else{substr($l,$i++,1)=$c;print "*"}}system("stty sane");print "\nyou entered: $l\n" if $l'
+
+ linux:~$ perl -we 'system("stty -echo raw");$bk=qx(tput kbs);$el=qx(tput el);$c=$l="";$i=0;while(1){$c=getc;last if $c eq "\r";if($c eq $bk){chop($l) && print"\b \b" if $l}elsif($c eq "\cu"){$l="";print"\r$el"}else{substr($l,$i++,1)=$c;print "*"}}system("stty sane");print "\nyou entered: $l\n" if $l'
+
+ perl -we 'system"stty -echo -icrnl -icanon";$b=qx(tput kbs);$el=qx(tput el);$l="";$t=10;while(){$t=(select("\1","","",$t))[1];last if !$t;$c=getc;last if$c eq"\r";if($c eq$b){if($l){print"\b \b";chop$l}}elsif($c eq"\cu"){$l="";print"\r$el"}else{substr($l,length($l),1)=$c;print"*"}}system"stty echo icrnl icanon";print"\nyou entered: $l\n"if$l'
+
+ perl -wle "$RequiredElements=q(a1 a2 a3);@required=split(/ /,$RequiredElements);$,=q(|);print @required;" -> a1|a2|a3
+
+ perl -we "$RequiredElements=q(a1 a2 a3);@required=split(/ /,$RequiredElements);foreach $require (@required){print $require,q(|)}" -> a1|a2|a3|
+
+ run   perl -v
+
+ perl -wle 'use POSIX"strftime";print strftime"%d/%m/%y",localtime'
+
+ perl -wle '@a=localtime;$a[4]++;$date=sprintf"%02d/%02d/%02d",@a[3,4,5];print$date'
+
+ the code is just inside of  perl -wle '   '
+
+ the perl -wle '  ' allows you to run perl scripts from the unix command line
+
+ perl -wle '$var=join("",map{chr}0..255);$var=~s/[^ -~]+//g;print $var'
+
+ perl -wle '$var=join("",map{chr}0..255);$var=~tr/ -~//cd;print $var' does the same thing
+
+ perl -wle '$var=join("",map{chr}0..255);$var=~s/[^\c.]+//g;print $var'
+
+ perl -wle 'print "\c."'
+
+ perl -wle 'print "\c."'
+
+ perl -w -c yourscript.pl  will check yourscript for errors  without actually running it
+
+ perl -wle '$in=shift(@ARGV);unless($in eq "su"){die "Incorrect usage: $!\n"}else{print "Correct"}' su
+
+ perl -wle '($month,$year)=(localtime)[4,5];$month++;print"month<$month> year<$year>"'
+
+ perl -wle '$,=" ";print +(split /\s/,scalar localtime)[1,2,4]'
+
+ perl -wle 'print qx/date +%A/'
+
+ perl -wle 'print unpack(q(@4A8@21A4),localtime)'
+
+ perl -wle 'print unpack(q(x4A8x9A4),localtime)'
+
+ perl -wle '$,="-";print unpack(q(@4A7@19A5),localtime)'
+
+ perl -wle '$,="-";print unpack(q(x4A7x9A4),localtime)'
+
+ perl -wle '$,="-";print unpack(q(x4A7x8A5),localtime)'
+
+ perl -wle '@m=qw(January February March April May June July August September October November December);($d,$m,$y)=(localtime)[3..5];$m=$m[$m];$y+=1900;print"$m $d, $y"'
+
+ perl -we '$|=1;use Term::ReadLine;use IO::Select;$s = IO::Select->new(\*STDIN);$term = new Term::ReadLine "test";$term->callback_handler_install("test: ",sub {print "entered: $_[0]\n";$term->addhistory($_[0]) if $_[0] =~ /\S/});while(@ready= $s->can_read){for(@ready){if($_ == \*STDIN){print $term->callback_read_char}}}'
+
+ type perl -v at the shell prompt
+
+ no.. tell me what perl -v returns
+
+ perl -wle '$_=5;$_ += 10; print'
+
+ perl -wle '$,=" ";print sort qw(b z o a c)'
+
+ perl -we '@x=qw/Ab Acc dc aBC daC/;for(sort{$a cmp $b}@x){print $_,"|"}'
+
+ perl -wle '$a=5;$b=3;print sort($a,$b)'
+
+ perl -wle '  ' is a convenience allowing you to run perl code from the command line without having to start up an editor and create a script just to test simple stuff out.
+
+ linux:~$ perl -wle '$a=5;$b=3;print sort($a,$b)'
+
+ perl -wle '$hash{a}{b}{c}=1;print keys %{$hash{a}}'
+
+ perl -wle 'open INDEX,">blah";select(INDEX);print "hi";close INDEX;' -e 'print "bye"'
+
+ perl -wle 'open INDEX,">blah";select(INDEX);print "hi";close INDEX;' -e 'select(STDOUT);print "bye"'
+
+ <lzh> perl -wle '$hash{a}{b}{c}=1;print keys %{$hash{a}}'
+
+* bosch_:#perl -> try it before you buy it :)
+
+ linux:~$ export var=blah ; perl -wle 'print $ENV{var}'
+
+* bosch_:#perl -> <Cactii> how would I pass it like perl remind.pl?var=value -> also, I think there was an implication of using QUERY_STRING in a question... so, I was trying to help... but, whatever
+
+ perl -wle '$v="LEFTthisRIGHT";if($v =~ /LEFT(.*?)RIGHT/){print "1($1)"}'
+
+* lzh:#perl will try installing the module as soon as perl -wMCPAN -e shell  comes up..
+
+* lzh:#perl recommends you play with perl -MCPAN -e shell  from the command line.. it is quite fun
+
+ Start / Programs / DOS   then I get a C:\> prompt  and I can type  perl -we "print qq(hello world!)"  and it prints hello world!
+
+ perl -we 'use Expect;$e=Expect->spawn("sh");$e->log_stdout(0);$f=Expect->spawn(qq(cat > a));$e->set_group($f);$e->send_slow(0,"uptime\r");$e->expect(undef,"-re",q(\d[^\r]+));print"uptime<",$e->exp_match(),">\n";$e->expect'
+
+ linux:~$ perl -we 'use Expect;$e=Expect->spawn("passwd");$e->exp_internal(1);$e->expect'
+
+ perl -wle '$var="\t\ta\n\t\tb";$var =~ s/^(\t+)/"o" x length($1) /gem;print "var<$var>"'
+
+  perl -wle 'print qq#woo woo!#'
+
+

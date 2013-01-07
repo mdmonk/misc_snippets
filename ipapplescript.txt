@@ -1,0 +1,51 @@
+--  Created by Daniel Veiner on Tue Oct 19 2004.
+
+set response to do shell script "/usr/bin/curl http://checkip.dyndns.org/"
+set ip_address to extract_ip(response)
+
+set the Reply to display dialog "You IP address is: " & ip_address 
+	buttons {"Send by email", "Just leave in pasteboard"} 
+	default button "Just leave in pasteboard" giving up after 10 with icon stop
+
+-- Leave the ip address in the Finder's pasteboard so it is accesible
+tell application "Finder"
+	activate
+	set the clipboard to ip_address
+end tell
+
+-- Send en email if requested
+set mailto_addr to "EMAILADDRESS"
+
+if button returned of Reply is "Send by email" then
+	send_ipget_mail_message(mailto_addr, ip_address)
+end if
+
+on send_ipget_mail_message(email_address, ip_address)
+	tell application "Mail"
+		activate
+		set composedMessage to (a reference to (make new outgoing message 
+			at the beginning of outgoing messages))
+		tell composedMessage
+			make new to recipient at beginning of to recipients 
+				with properties {address:"vainer@synopsys.com"}
+			set the subject to "iPGet report"
+			set the content to ip_address
+		end tell
+		send composedMessage
+	end tell
+end send_ipget_mail_message
+
+-- Function to extract ip from HTML returned by dydns.com 
+on extract_ip(this_text)
+	set clean_ip to ""
+	set this_char to ""
+	repeat with this_char in this_text
+		set this_char to the contents of this_char
+		if the this_char is in {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."} then
+			set the clean_ip to the clean_ip & this_char as string
+		end if
+	end repeat
+	return the clean_ip
+end extract_ip
+
+-- end script

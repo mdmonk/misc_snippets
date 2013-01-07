@@ -1,0 +1,56 @@
+#########################################################
+# One Liners
+#########################################################
+
+ppath - What is my path ? So I can read it...
+usage - c:\> ppath
+=========================
+ppath=perl -e "print join qq(\n), split(/;/,$ENV{PATH})"
+
+#########################################################
+
+dpath - Do a wildcard directory listing along my path
+usage - c:\> dpath perl* pod*
+=======================================================
+dpath=perl -e "foreach $dir (split(/;/,$ENV{PATH}))
+{ print qq(\n====== $dir ======\n);
+  map {print qq(  $_\n)} <$dir\\$_>
+    foreach @ARGV; }" $*
+
+#########################################################
+
+dperl - Drop me into the Perl Debugger
+======================================
+usage - c:\> dperl
+dperl=perl -d -e 1
+
+#########################################################
+
+doskey k=perl -e "$_=`ps -a`;m#(\d+)\s+\d+.*$ARGV[0]#;`kill -s SIGKILL $+`;"
+$*
+
+Kills a process by name (WinNT only & maybe Win98). Great for when you want
+to get rid of Explorer from interfering with directory restructuring during
+an automated process.
+
+#########################################################
+
+perl -e "grep{s#/#\\#g or 1}@ARGV;system('start',@ARGV)"
+
+What is it good for?
+Perl often reports paths to erorneous modules or scripts using mixed 
+slashes, some are backward some are forward.
+And the shell or editors often are not able to understand it.
+This onliner will convert forward to backward slashes and run it 
+through "start".
+
+I've mapped it to alias "u" (like Unix ;-)
+
+c:\> doskey u=perl -e "map{s#/#\\#g or 1}@ARGV;system('start',@ARGV)" $*
+
+So now I may write :
+
+c:\> u pfe E:/TEMP/Net-Telnet-3.01/blib/lib/Net/Telnet.pm
+
+#########################################################
+
